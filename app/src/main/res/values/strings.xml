@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">AvesDeliverApp</string>
 
+    <string-array name="drawer_items">
+        <item >TRIP START</item>
+        <item >DELIVERY DETAILS</item>
+        <item >TRIP END</item>
+        <item >SYNC</item>
+    </string-array>
     <!-- Strings related to login -->
     <string name="aves">AVES</string>
     <string name="prompt_email">Email</string>
