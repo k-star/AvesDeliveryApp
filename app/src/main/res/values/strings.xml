@@ -22,4 +22,8 @@
         completions."
     </string>
     <string name="copyright">Copyright Excel Infotech Solutions Pvt. Ltd.</string>
+
+    <string name="trip_start">TRIP START</string>
+    <string name="orders_today">Orders Today</string>
+    <string name="copyright_excel">Excel Infotech Solutions Pvt. Ltd.</string>
 </resources>

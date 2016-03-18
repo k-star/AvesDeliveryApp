@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import aves.deliveryapp.R;
 import aves.deliveryapp.adapter.DrawerListAdapter;
+import aves.deliveryapp.fragment.TripStartFragment;
 
 /**
  * Created on 3/13/2016.
@@ -26,7 +27,6 @@ import aves.deliveryapp.adapter.DrawerListAdapter;
 public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     // nav drawer title
     private CharSequence mDrawerTitle;
@@ -71,24 +71,6 @@ public class MainActivity extends FragmentActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         //getActionBar().setHomeButtonEnabled(true);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.location_indicator, //nav menu toggle icon
-                R.string.app_name, // nav drawer open - description for accessibility
-                R.string.app_name // nav drawer close - description for accessibility
-        ) {
-            public void onDrawerClosed(View view) {
-                //getActionBar().setTitle(mTitle);
-                // calling onPrepareOptionsMenu() to show action bar icons
-                invalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                //getActionBar().setTitle(mDrawerTitle);
-                // calling onPrepareOptionsMenu() to hide action bar icons
-                invalidateOptionsMenu();
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
@@ -105,9 +87,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // toggle nav drawer on selecting action bar app icon/title
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.action_settings:
@@ -143,14 +123,12 @@ public class MainActivity extends FragmentActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
-        mDrawerToggle.onConfigurationChanged(newConfig);
     }
     /**
      * Slide menu item click listener
@@ -173,7 +151,7 @@ public class MainActivity extends FragmentActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                //fragment = new HomeFragment();
+                fragment = new TripStartFragment();
                 break;
             case 1:
                 //fragment = new FindPeopleFragment();

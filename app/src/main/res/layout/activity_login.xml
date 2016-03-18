@@ -26,8 +26,8 @@
 
         <LinearLayout
             android:id="@+id/email_login_form"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical">
             <TextView
@@ -42,6 +42,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/fifty_dp"
                 android:background="@color/light_gray">
 
@@ -62,6 +63,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/twenty_dp"
                 android:background="@color/light_gray">
 
@@ -86,7 +88,8 @@
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceMedium"
                 android:layout_width="@dimen/threehundred_dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textColor="@android:color/white"
@@ -101,7 +104,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/copyright"/>
+                    android:src="@drawable/copyright_black"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
