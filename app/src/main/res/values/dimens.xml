@@ -5,5 +5,8 @@
     <dimen name="ten_dp">10dp</dimen>
     <dimen name="twenty_dp">20dp</dimen>
     <dimen name="fifty_dp">50dp</dimen>
+    <dimen name="hundred_dp">100dp</dimen>
     <dimen name="threehundred_dp">300dp</dimen>
+
+    <dimen name="twenty_sp">20sp</dimen>
 </resources>

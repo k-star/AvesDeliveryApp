@@ -10,6 +10,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/twenty_dp"
             android:layout_marginLeft="@dimen/ten_dp"
-            android:textColor="@color/light_gray"/>
+            android:textColor="@android:color/darker_gray"/>
 
 </LinearLayout>

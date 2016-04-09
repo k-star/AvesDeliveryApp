@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import aves.deliveryapp.R;
 import aves.deliveryapp.adapter.DrawerListAdapter;
+import aves.deliveryapp.fragment.DeliveryDetailsFragment;
 import aves.deliveryapp.fragment.TripStartFragment;
 
 /**
@@ -61,6 +62,7 @@ public class MainActivity extends FragmentActivity {
         drawerItems.add(menuTitles[1]);
         drawerItems.add(menuTitles[2]);
         drawerItems.add(menuTitles[3]);
+        drawerItems.add(menuTitles[4]);
 
         // setting the nav drawer list adapter
         adapter = new DrawerListAdapter(getApplicationContext(),
@@ -154,7 +156,7 @@ public class MainActivity extends FragmentActivity {
                 fragment = new TripStartFragment();
                 break;
             case 1:
-                //fragment = new FindPeopleFragment();
+                fragment = new DeliveryDetailsFragment();
                 break;
             case 2:
                 //fragment = new PhotosFragment();
@@ -162,7 +164,9 @@ public class MainActivity extends FragmentActivity {
             case 3:
                 //fragment = new CommunityFragment();
                 break;
+            case 4:
 
+                break;
             default:
                 break;
         }

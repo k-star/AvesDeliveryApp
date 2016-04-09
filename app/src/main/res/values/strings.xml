@@ -6,6 +6,7 @@
         <item >DELIVERY DETAILS</item>
         <item >TRIP END</item>
         <item >SYNC</item>
+        <item >VIEW</item>
     </string-array>
     <!-- Strings related to login -->
     <string name="aves">AVES</string>
@@ -24,6 +25,20 @@
     <string name="copyright">Copyright Excel Infotech Solutions Pvt. Ltd.</string>
 
     <string name="trip_start">TRIP START</string>
+    <string name="save">SAVE</string>
+    <string name="trip_opening_km">Trip Opening KM :</string>
+    <string name="route_name">Route Name :</string>
+    <string name="vehicle_no">Vehicle No.:</string>
+    <string name="trip_start_date">Trip Start Date :</string>
+    <string name="trip_start_time">Trip Start Time :</string>
+    <string name="supervisor_name">Supervisor Name :</string>
+
+    <string name="trip_end">TRIP END</string>
+    <string name="trip_closing_km">Trip Closing KM :</string>
+    <string name="trip_end_date">Trip End Date :</string>
+    <string name="trip_end_time">Trip End Time :</string>
+
+    <string name="delivery_details">DELIVERY DETAILS</string>
     <string name="orders_today">Orders Today</string>
     <string name="copyright_excel">Excel Infotech Solutions Pvt. Ltd.</string>
 </resources>
