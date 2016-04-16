@@ -30,13 +30,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/aves"
-                style="?android:textAppearanceLarge"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"/>
+                android:src="@drawable/logo"/>
 
 
             <android.support.design.widget.TextInputLayout
@@ -84,37 +82,23 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <ImageButton
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceMedium"
-                android:layout_width="@dimen/threehundred_dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textColor="@android:color/white"
-                android:background="@drawable/button_red"
-                android:textStyle="bold" />
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/twenty_dp"
-                android:layout_gravity="center_horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/copyright_black"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/copyright"
-                    android:layout_marginLeft="@dimen/ten_dp"
-                    style="?android:textAppearanceSmall"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@android:color/darker_gray"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_button"
+                android:textStyle="bold" />
 
-            </LinearLayout>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:src="@drawable/copyright"
+                    android:layout_gravity="center_horizontal"/>
+
         </LinearLayout>
 
     </ScrollView>

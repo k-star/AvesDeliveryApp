@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import aves.deliveryapp.R;
 import aves.deliveryapp.adapter.DrawerListAdapter;
 import aves.deliveryapp.fragment.DeliveryDetailsFragment;
+import aves.deliveryapp.fragment.TripEndFragment;
 import aves.deliveryapp.fragment.TripStartFragment;
 
 /**
@@ -68,7 +69,7 @@ public class MainActivity extends FragmentActivity {
         adapter = new DrawerListAdapter(getApplicationContext(),
                 drawerItems);
         mDrawerList.setAdapter(adapter);
-
+        mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
         // enabling action bar app icon and behaving it as toggle button
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         //getActionBar().setHomeButtonEnabled(true);
@@ -159,7 +160,7 @@ public class MainActivity extends FragmentActivity {
                 fragment = new DeliveryDetailsFragment();
                 break;
             case 2:
-                //fragment = new PhotosFragment();
+                fragment = new TripEndFragment();
                 break;
             case 3:
                 //fragment = new CommunityFragment();

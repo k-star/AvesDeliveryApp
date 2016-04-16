@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_red">
+    android:background="@drawable/background">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -32,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:background="@android:color/white"
+        android:layout_marginLeft="@dimen/twenty_dp"
+        android:layout_marginRight="@dimen/twenty_dp"
+        android:background="@drawable/background_white"
         android:layout_weight="0.8">
         <ListView
             android:layout_width="match_parent"
