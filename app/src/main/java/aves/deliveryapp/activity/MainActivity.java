@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import aves.deliveryapp.R;
 import aves.deliveryapp.adapter.DrawerListAdapter;
+import aves.deliveryapp.fragment.CompletedDeliveriesFragment;
 import aves.deliveryapp.fragment.DeliveryDetailsFragment;
 import aves.deliveryapp.fragment.TripEndFragment;
 import aves.deliveryapp.fragment.TripStartFragment;
@@ -163,10 +164,10 @@ public class MainActivity extends FragmentActivity {
                 fragment = new TripEndFragment();
                 break;
             case 3:
-                //fragment = new CommunityFragment();
+
                 break;
             case 4:
-
+                fragment = new CompletedDeliveriesFragment();
                 break;
             default:
                 break;

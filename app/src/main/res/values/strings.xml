@@ -39,6 +39,11 @@
     <string name="trip_end_time">Trip End Time :</string>
 
     <string name="delivery_details">DELIVERY DETAILS</string>
+    <string name="completed_deliveries">COMPLETED DELIVERIES</string>
     <string name="orders_today">Orders Today</string>
     <string name="copyright_excel">Excel Infotech Solutions Pvt. Ltd.</string>
+
+    <string name="delivery_date">Delivery Date</string>
+    <string name="delivery_in_time">Delivery in Time</string>
+    <string name="delivery_out_time">Delivery out Time</string>
 </resources>
