@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,21 +28,37 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import aves.deliveryapp.R;
+import aves.deliveryapp.model.UserDetails;
+import aves.deliveryapp.servicecall.AsyncInvokeURLTask;
+import aves.deliveryapp.utils.CommonMethods;
+import aves.deliveryapp.utils.Constants;
+import aves.deliveryapp.utils.GsonConvertor;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, AsyncInvokeURLTask.OnPostExecuteListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -58,7 +75,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -90,9 +106,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                //attemptLogin();
+
+                attemptLogin();
             }
         });
 
@@ -156,9 +171,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
+//        if (mAuthTask != null) {
+//            return;
+//        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -197,19 +212,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            callServiceSLogin(email, password);
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 2;
     }
 
     /**
@@ -331,62 +345,115 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    @Override
+    public void onPostExecute(String response) {
 
-        private final String mEmail;
-        private final String mPassword;
+        try {
+            JSONObject responseObj = null;
+            responseObj = new JSONObject(response);
+            boolean status = responseObj.getBoolean("status");
+            Log.e("status------->", "" + status);
+            Gson gson = new Gson();
+            if(status) {
+                boolean authorized = responseObj.getBoolean("authorized");
+                if (authorized) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
                 }
+                else{
+                    String errMsg = responseObj.getString("errMsg");
+                    toastMsg("Attention!  " + errMsg);
+                    CommonMethods.setAlertPopup(LoginActivity.this,
+                            "Username or Password Incorect!").show();
+                }
+//            if (status) {
+//                boolean authorized = responseObj.getBoolean("authorized");
+//                if (authorized) {
+//                    String output = responseObj.getString("users");
+//
+//                    SystemUser userDetails = new SystemUser();
+//
+//                    try {
+//                        userDetails = gson.fromJson(output,
+//                                new TypeToken<SystemUser>() {
+//                                }.getType());
+//                        userDetails = new GsonConvertor()
+//                                .convertJsonToObject(userDetails);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    if (userDetails != null) {
+//
+//                        //get system obj from shared pref
+//                        String userInfoVal= gson.toJson(new GsonConvertor()
+//                                .convertObjectToJson(userDetails));
+//                        editor.putString("SystemUser", userInfoVal);
+//                        editor.putString("ExceName", userDetails.getName());
+//                        editor.commit();
+//
+//                        if(((CheckBox) findViewById(R.id.check_box_next_time_auto)).isChecked()){
+//                            Constants.IS_SAVE_USER=true;
+//                            callNextActivity();
+//                        }
+//                        else{
+//                            callNextActivity();
+//                        }
+//
+//                    } else {
+//                        toastMsg("Authentication failed. Try again later");
+//
+//                    }
+//
+//                } else {
+//                    String errMsg = responseObj.getString("errMsg");
+//                    toastMsg("Attention!  " + errMsg);
+//                    CommonMethods.setAlertPopup(LoginActivity.this,
+//                            "Username or Password Incorect!").show();
+//                }
+           } else {
+                toastMsg("Authentication failed. Try again later");
             }
-
-            // TODO: register the new account here with webservice
-            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
+        showProgress(false);
 
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
+    }
 
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
+    protected void callServiceSLogin(String email,String password) {
+
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+                2);
+
+        UserDetails userInfo = new UserDetails();
+        userInfo.setUserId(email);
+        userInfo.setPassword(password);
+        List<String> locationDetails = new ArrayList<String>();
+        locationDetails.add(""+Constants.USER_LAT);
+        locationDetails.add(""+Constants.USER_LANG);
+        userInfo.setLocationDetails(locationDetails);
+
+        Gson gson = new Gson();
+        JsonElement jsonElement = gson.toJsonTree(userInfo,
+                new TypeToken<UserDetails>() {
+                }.getType());
+        nameValuePairs.add(new BasicNameValuePair("userInfo", jsonElement
+                .toString()));
+
+        try {
+            AsyncInvokeURLTask task = new AsyncInvokeURLTask(nameValuePairs,
+                    Constants.LOGIN_SUB_URL, this);
+            task.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+
+    private void toastMsg(String text) {
+        Toast.makeText(LoginActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
 }
 
